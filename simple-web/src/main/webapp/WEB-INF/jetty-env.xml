@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Configure PUBLIC "-//Mort Bay Consulting//DTD Configure//EN"
+    "http://jetty.mortbay.org/configure.dtd">
+<Configure class="org.eclipse.jetty.webapp.WebAppContext">
+    <New id="DSTest" class="org.eclipse.jetty.plus.jndi.Resource">
+     <Arg></Arg>
+     <Arg>jdbc/derby</Arg>
+     <Arg>
+      <New class="com.mchange.v2.c3p0.ComboPooledDataSource">
+         <Set name="driverClass">org.apache.derby.jdbc.ClientDriver</Set>
+         <Set name="jdbcUrl">jdbc:derby://127.0.0.1:1527/hjj;create=true</Set>
+         <Set name="user">app</Set>
+         <Set name="password">app</Set>
+      </New>
+     </Arg>
+    </New> 
+    <New id="HjjDB" class="org.eclipse.jetty.plus.jndi.Resource">
+     <Arg></Arg>
+     <Arg>jdbc/hjj</Arg>
+     <Arg>
+      <New class="com.mchange.v2.c3p0.ComboPooledDataSource">
+         <Set name="driverClass">oracle.jdbc.driver.OracleDriver</Set>
+         <Set name="jdbcUrl">jdbc:mysql://10.74.206.24:3306/channel_db?noDatetimeStringSync=true&amp;characterEncoding=utf8</Set>
+         <Set name="user">root</Set>
+         <Set name="password">root</Set>
+      </New>
+     </Arg>
+    </New>
+</Configure>

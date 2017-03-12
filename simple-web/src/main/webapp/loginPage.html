@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=5,chrome=1" />
+	<title>管理系统</title>
+	<link rel="shortcut icon" href="res/images/login.ico" type="image/x-icon" />
+<style type="text/css">
+<!--
+body {
+	margin-left: 0px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+	background-color: #1D3647;
+}
+.bian { border:1px #CCCCCC solid; font-size:12px; }
+.bian2 { border:1px #CCCCCC solid; font-size:12px; text-align:center }
+-->
+</style>
+
+<script src="res/js/third/jquery.js"></script> 
+<script language="JavaScript">
+var interval = 1000;
+
+var id = 1;
+var nonStop = true;
+$(function() {
+		$("#codeImage").click(function()
+		{
+			this.src="/simple-web-1.0-SNAPSHOT/image?id="+id;
+      id++;
+		});
+
+		$("#start").click(function()
+		{
+		    setInterval("intervalImages()",interval);
+		});
+
+});
+
+function intervalImages(){
+  $("#codeImage").click();
+}
+
+</script>
+
+<link href="res/images4login/skin.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+<!--
+.STYLE2 {
+	font-size: 24px;
+	font-weight: bold;
+	color: #01A0BE;
+	font-family: "宋体";
+}
+-->
+</style>
+
+</head>
+<body>
+<div id="list">
+  <div><input type="button" id="start" value="Start"/></div>
+  <div><input type="button" id="stop" value="Stop"/></div>
+  <div><img id="codeImage" title="点击更换验证码" src="/image" /></div>
+</div>
