@@ -21,7 +21,7 @@ public class StartDerby {
 			NetworkServerControl derbyNetwork;
 			derbyNetwork = new NetworkServerControl();
 			derbyNetwork.start(new PrintWriter(System.out));
-			DriverManager.getConnection("jdbc:derby://127.0.0.1:1527/hjj;create=true;user=app;password=app;");
+			DriverManager.getConnection("jdbc:derby://localhost:1527/hjj;create=true;user=app;password=app;");
 			BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 			br.readLine();
 		} 

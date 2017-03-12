@@ -6,8 +6,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 /**
- * ��ʼ������
- * @author 
+ * @author
  *
  */
 public class InitDerby {
@@ -27,10 +26,12 @@ public class InitDerby {
 			con = DriverManager.getConnection(url);
 			stm = con.createStatement();
 //			stm.execute(InitSql.dropImage);
-//			stm.execute(InitSql.createImage);
-//			stm.execute("insert into t_image(path) values('D:/IMG_0002.JPG')");
-//			stm.execute("insert into t_image(path) values('D:/1/1.gif')");
-			stm.execute("insert into t_image(path) values('D:/1/4.png')");
+			stm.execute(InitSql.createImage);
+			stm.execute("insert into t_image(path) values('/Users/tangpeng/Documents/PICTURE/旺德福小绘本/9.23头发乱了.JPG')");
+			stm.execute("insert into t_image(path) values('/Users/tangpeng/Documents/PICTURE/旺德福小绘本/9.25拓本.JPG')");
+			stm.execute("insert into t_image(path) values('/Users/tangpeng/Documents/PICTURE/旺德福小绘本/Cover.jpg')");
+			stm.execute("insert into t_image(path) values('D:/1/1.gif')");
+//			stm.execute("insert into t_image(path) values('D:/1/4.png')");
 		} 
 		catch (Exception e) 
 		{

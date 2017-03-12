@@ -22,20 +22,24 @@
 
   <!-- bean id="DataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
              <property name="jndiName" value="java:comp/env/jdbc/derby" />
-    </bean-->
+    </bean
   <bean id="DataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
     <property name="driverClass" value="org.apache.derby.jdbc.ClientDriver"></property>
     <property name="jdbcUrl" value="jdbc:derby://127.0.0.1:1527/hjj;create=true"></property>
     <property name="user" value="app"></property>
     <property name="password" value="app"></property>
-  </bean>
+    <property name="acquireRetryDelay" value="1000"></property>
+    <property name="acquireRetryAttempts" value="10"></property>
+  </bean>-->
 
 
-  <!-- bean id="DataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+  <bean id="DataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
     <property name="driverClass" value="oracle.jdbc.driver.OracleDriver"></property>
-    <property name="jdbcUrl" value=""jdbc:oracle:thin:@ip:port:sid"></property>
+    <property name="jdbcUrl" value="jdbc:oracle:thin:@ip:port:sid"></property>
     <property name="user" value="app"></property>
     <property name="password" value="app"></property>
-  </bean -->
+    <property name="acquireRetryDelay" value="1000"></property>
+    <property name="acquireRetryAttempts" value="10"></property>
+  </bean>
 
 </beans>
