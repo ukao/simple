@@ -8,6 +8,7 @@
   <name>simple-web Maven Webapp</name>
   <url>http://maven.apache.org</url>
   <build>
+    <finalName>simple-web</finalName>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -53,14 +54,14 @@
       <artifactId>jetty-server</artifactId>
       <version>8.1.9.v20130131</version>
       <type>jar</type>
-      <scope>compile</scope>
+      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.eclipse.jetty</groupId>
       <artifactId>jetty-webapp</artifactId>
       <version>8.1.9.v20130131</version>
       <type>jar</type>
-      <scope>compile</scope>
+      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.mortbay.jetty</groupId>
@@ -113,27 +114,27 @@
       <artifactId>jetty-jsp</artifactId>
       <version>8.1.9.v20130131</version>
       <type>jar</type>
-      <scope>compile</scope>
+      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>com.sun.jersey</groupId>
       <artifactId>jersey-json</artifactId>
       <version>1.5</version>
-      <scope>compile</scope>
+      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.apache.derby</groupId>
       <artifactId>derby</artifactId>
       <version>10.10.1.1</version>
       <type>jar</type>
-      <scope>compile</scope>
+      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.apache.derby</groupId>
       <artifactId>derbynet</artifactId>
       <version>10.10.1.1</version>
       <type>jar</type>
-      <scope>compile</scope>
+      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>com.oracle</groupId>
@@ -146,7 +147,7 @@
       <artifactId>jetty-plus</artifactId>
       <version>8.1.9.v20130131</version>
       <type>jar</type>
-      <scope>compile</scope>
+      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>c3p0</groupId>
@@ -160,7 +161,7 @@
       <artifactId>derbyclient</artifactId>
       <version>10.10.1.1</version>
       <type>jar</type>
-      <scope>compile</scope>
+      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>jdom</groupId>
@@ -174,7 +175,7 @@
       <artifactId>jetty-websocket</artifactId>
       <version>8.1.9.v20130131</version>
       <type>jar</type>
-      <scope>compile</scope>
+      <scope>provided</scope>
     </dependency>
 
     <dependency>
@@ -194,6 +195,7 @@
       <groupId>mysql</groupId>
       <artifactId>mysql-connector-java</artifactId>
       <version>5.1.34</version>
+      <scope>provided</scope>
     </dependency>
   </dependencies>
 </project>

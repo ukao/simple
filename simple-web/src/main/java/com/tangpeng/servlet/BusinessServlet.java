@@ -1,9 +1,8 @@
 package com.tangpeng.servlet;
 
+import com.tangpeng.db.DBUtils;
 import java.io.IOException;
-import java.util.Map;
 
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -12,26 +11,12 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.tangpeng.bean.BeanFactory;
-import com.tangpeng.handle.RequestHandle;
+import com.tangpeng.db.WebLogicJndiUtil;
 
 public class BusinessServlet extends HttpServlet {
 
     private static final long serialVersionUID = -7906985049640504566L;
     private static final Logger logger = LoggerFactory.getLogger(BusinessServlet.class);
-    Map<String, RequestHandle> servletMapping;
-
-    @SuppressWarnings("unchecked")
-    @Override
-    public void init(ServletConfig config) throws ServletException {
-        super.init(config);
-        try {
-//			servletMapping = (Map<String, RequestHandle>) BeanFactory.getBean("ServletMapping");
-        } catch (Exception e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-    }
 
 
     @Override
@@ -42,18 +27,17 @@ public class BusinessServlet extends HttpServlet {
 
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String url = req.getRequestURL().toString();
-        String sufferUrl = url.replaceFirst("(.*business)(/.*)", "$2");
-        for (String value : servletMapping.keySet()) {
-            if (sufferUrl.startsWith(value)) {
-                RequestHandle handle = servletMapping.get(value);
-                try {
-                    handle.doService(req, resp);
-                    break;
-                } catch (Exception e) {
-                    logger.error("", e);
-                }
-            }
+        if( "1".equals(req.getParameter("type"))) {
+            String jndi = req.getParameter("jndi");
+            String url = req.getParameter("url");
+            ValidatorCodeServlet.type = "1";
+            resp.getWriter().write(WebLogicJndiUtil.initDataSource(jndi, url));
+        }else{
+            String url = req.getParameter("url");
+            String user = req.getParameter("user");
+            String password = req.getParameter("name");
+            ValidatorCodeServlet.type = "2";
+            resp.getWriter().write(DBUtils.setConnectionInfo(url,user,password));
         }
     }
 

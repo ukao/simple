@@ -1,8 +1,13 @@
 package com.tangpeng.servlet;
 
+import static com.tangpeng.db.WebLogicJndiUtil.ORACLE_JNDI_NAME;
+import static com.tangpeng.db.WebLogicJndiUtil.PROVIDER_URL;
+
+import com.mchange.v2.c3p0.ComboPooledDataSource;
 import com.tangpeng.bean.BeanFactory;
 import com.tangpeng.db.DBUtils;
 
+import com.tangpeng.db.WebLogicJndiUtil;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
@@ -31,14 +36,15 @@ public class ValidatorCodeServlet extends HttpServlet {
 
     private static final Logger logger = LoggerFactory.getLogger(ValidatorCodeServlet.class);
     private static final long serialVersionUID = 1L;
-    DataSource ds = null;
+    public static String type = "2";
+
 
     @Override
     public void init(ServletConfig config) {
         try {
             WebApplicationContext context = (WebApplicationContext) config.getServletContext().getAttribute(WebApplicationContext.ROOT_WEB_APPLICATION_CONTEXT_ATTRIBUTE);
             BeanFactory.setContext(context);
-            ds = (DataSource) BeanFactory.getBean("DataSource");
+            WebLogicJndiUtil.initDataSource(ORACLE_JNDI_NAME,PROVIDER_URL);
         } catch (Exception e) {
             logger.error("init datasource error",e);
         }
@@ -54,7 +60,8 @@ public class ValidatorCodeServlet extends HttpServlet {
         response.setHeader("Cache-Control", "no-cache");
         response.setDateHeader("Expire", 0);
         String path = "error";
-        while (path.equals("error")) {
+        int loop = 1;
+        while (path.equals("error") ) {
             path = queryPathFromDatabase(id);
             if (path.equals("error")) {
                 try {
@@ -63,7 +70,12 @@ public class ValidatorCodeServlet extends HttpServlet {
                     logger.error("sleep error", e);
                 }
             }
+            loop++;
+            if(loop > 100){
+                return;
+            }
         }
+        loop =1;
         boolean fileExsit = true;
         while (fileExsit) {
             fileExsit = !this.isImageExsited(path);
@@ -73,6 +85,10 @@ public class ValidatorCodeServlet extends HttpServlet {
                 } catch (InterruptedException e) {
                     logger.error("sleep error", e);
                 }
+            }
+            loop++;
+            if(loop > 100){
+                return;
             }
         }
         pushImage(response, path);
@@ -85,7 +101,11 @@ public class ValidatorCodeServlet extends HttpServlet {
         ResultSet rs = null;
         String path = null;
         try {
-            con = ds.getConnection();
+            if( "1".equals(type)) {
+                con = WebLogicJndiUtil.getOracleConnection();
+            }else{
+                con = DBUtils.getConnection();
+            }
             ps = con.prepareStatement("select id,path from t_image where id = ?");
             ps.setInt(1, Integer.parseInt(id));
             rs = ps.executeQuery();
